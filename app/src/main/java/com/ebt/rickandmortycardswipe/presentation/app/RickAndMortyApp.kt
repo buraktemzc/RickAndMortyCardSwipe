@@ -1,4 +1,4 @@
-package com.ebt.rickandmortycardswipe.presentation
+package com.ebt.rickandmortycardswipe.presentation.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

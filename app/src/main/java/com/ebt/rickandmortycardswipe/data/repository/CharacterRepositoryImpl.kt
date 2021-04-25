@@ -5,8 +5,9 @@ import com.ebt.rickandmortycardswipe.data.repository.datasource.CharacterRemoteD
 import com.ebt.rickandmortycardswipe.data.util.Result
 import com.ebt.rickandmortycardswipe.domain.repository.CharacterRepository
 import retrofit2.Response
+import javax.inject.Inject
 
-class CharacterRepositoryImpl(
+class CharacterRepositoryImpl @Inject constructor(
     private val characterRemoteDataSource: CharacterRemoteDataSource
 ) : CharacterRepository {
 

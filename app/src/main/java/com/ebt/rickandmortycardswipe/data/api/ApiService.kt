@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("/character/")
+    @GET("character")
     suspend fun getCharacters(
         @Query("page")
         page: Int

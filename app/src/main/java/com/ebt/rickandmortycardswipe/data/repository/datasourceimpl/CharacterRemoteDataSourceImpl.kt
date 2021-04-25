@@ -4,8 +4,9 @@ import com.ebt.rickandmortycardswipe.data.api.ApiService
 import com.ebt.rickandmortycardswipe.data.model.APIResponse
 import com.ebt.rickandmortycardswipe.data.repository.datasource.CharacterRemoteDataSource
 import retrofit2.Response
+import javax.inject.Inject
 
-class CharacterRemoteDataSourceImpl(
+class CharacterRemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService
 ) : CharacterRemoteDataSource {
 
