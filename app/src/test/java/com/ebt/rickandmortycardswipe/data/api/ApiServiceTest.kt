@@ -42,7 +42,7 @@ class ApiServiceTest {
             enqueueMockResponse("characters_response.json")
             val responseBody = service.getCharacters(1).body()
             val request = mockWebServer.takeRequest()
-            assertThat(request.path).isEqualTo("/character/?page=1")
+            assertThat(request.path).isEqualTo("/character?page=1")
         }
     }
 

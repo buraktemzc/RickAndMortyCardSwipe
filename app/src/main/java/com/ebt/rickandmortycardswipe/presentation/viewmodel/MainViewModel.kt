@@ -14,6 +14,7 @@ import com.ebt.rickandmortycardswipe.domain.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,21 +22,43 @@ class MainViewModel @Inject constructor(
     private val app: Application,
     private val getCharactersUseCase: GetCharactersUseCase
 ) : ViewModel() {
-    val characters: MutableLiveData<Result<APIResponse>> = MutableLiveData()
+    private val pageNumber: MutableLiveData<Int> = MutableLiveData(1)
+    val apiResult: MutableLiveData<Result<APIResponse>> = MutableLiveData()
+    val totalLike: MutableLiveData<Int> = MutableLiveData(0)
+    val totalDislike: MutableLiveData<Int> = MutableLiveData(0)
+    var endOfCharacterSet: Boolean = false
 
-    fun getCharacters(page: Int) = viewModelScope.launch(Dispatchers.IO) {
-        characters.postValue(Result.Loading())
+    fun incrementTotalLike() {
+        totalLike.value = totalLike.value?.plus(1)
+    }
+
+    fun incrementTotalDislike() {
+        totalDislike.value = totalDislike.value?.plus(1)
+    }
+
+    fun getCharacters() = viewModelScope.launch(Dispatchers.IO) {
+        apiResult.postValue(Result.Loading())
 
         try {
             if (isNetworkAvailable(app)) {
-                val result = getCharactersUseCase.execute(page)
-                characters.postValue(result)
+                val result = getCharactersUseCase.execute(pageNumber.value!!)
+                withContext(Dispatchers.Main) {
+                    apiResult.value = result
+                    if (apiResult.value!!.data?.info?.next != null)
+                        incrementPageNumber()
+                    else
+                        endOfCharacterSet = true
+                }
             } else {
-                characters.postValue(Result.Error("No internet connection"))
+                apiResult.value = Result.Error("No internet connection")
             }
         } catch (e: Exception) {
-            characters.postValue(Result.Error(e.message.toString()))
+            apiResult.value = Result.Error(e.message.toString())
         }
+    }
+
+    private fun incrementPageNumber() {
+        pageNumber.value = pageNumber.value?.plus(1)
     }
 
     private fun isNetworkAvailable(context: Context?): Boolean {

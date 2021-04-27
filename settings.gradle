@@ -1,2 +1,3 @@
+include ':cardswipelib'
 include ':app'
 rootProject.name = "RickAndMortyCardSwipe"

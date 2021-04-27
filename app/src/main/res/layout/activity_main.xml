@@ -6,6 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.MainActivity">
 
+    <TextView
+        android:id="@+id/total_like_tv"
+        style="@style/AppTextStyle"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Total Like: 12" />
+
+    <TextView
+        android:id="@+id/total_dislike_tv"
+        style="@style/AppTextStyle"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_like_tv"
+        tools:text="Total Dislike: 5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_dislike_tv"
+        tools:listitem="@layout/item_card_view" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"

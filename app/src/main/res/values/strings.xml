@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RickAndMortyCardSwipe</string>
+    <string name="character_name">Name: %1$s</string>
+    <string name="character_status">Status: %1$s</string>
+    <string name="character_location">Last known location: %1$s</string>
+    <string name="total_like">Total Like: %1$d</string>
+    <string name="total_dislike">Total Dislike: %1$d</string>
+    <string name="end_of_character_set">End of character set.</string>
 </resources>
